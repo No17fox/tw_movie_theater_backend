@@ -3,7 +3,6 @@ package com.luluyang.twmovietheater.model;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import java.util.List;
 
 @Entity
 @Table(name = "movie")
@@ -15,9 +14,9 @@ public class Movie {
     private String title;
     private double rating;
     private String original_title;
-    private List<String> directors;
-    private List<String> casts;
-    private List<String> genres;
+    private String directors;
+    private String casts;
+    private String genres;
     private String image;
 
     public Integer getId() {
@@ -68,27 +67,27 @@ public class Movie {
         this.original_title = original_title;
     }
 
-    public List<String> getDirectors() {
+    public String getDirectors() {
         return this.directors;
     }
 
-    public void setDirectors(List<String> directors) {
+    public void setDirectors(String directors) {
         this.directors = directors;
     }
 
-    public List<String> getCasts() {
+    public String getCasts() {
         return this.casts;
     }
 
-    public void setCasts(List<String> casts) {
+    public void setCasts(String casts) {
         this.casts = casts;
     }
 
-    public List<String> getGenres() {
+    public String getGenres() {
         return this.genres;
     }
 
-    public void setGenres(List<String> genres) {
+    public void setGenres(String genres) {
         this.genres = genres;
     }
 
