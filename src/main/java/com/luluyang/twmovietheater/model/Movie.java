@@ -1,4 +1,4 @@
-package com.luluyang.twmovietheater;
+package com.luluyang.twmovietheater.model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
