@@ -37,7 +37,7 @@ public class MovieController {
         return movieRepository.findByGenresLike("%" + genres + "%");
     }
 
-    @GetMapping("/movies/search")
+    @GetMapping("/movies/keyword")
     public Iterable<Movie> getMoviesBySearch(
             @RequestParam("key") String key
     ) {
