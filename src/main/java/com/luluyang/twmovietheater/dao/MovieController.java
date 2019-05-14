@@ -7,7 +7,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 public class MovieController {
@@ -41,5 +44,13 @@ public class MovieController {
         List<Movie> movies = movieRepository.findByTitleLike("%" + key + "%");
         movies.addAll(movieRepository.findByGenresLike("%" + key + "%"));
         return movies;
+    }
+
+    @GetMapping("/genres")
+    public Iterable<String> getGenres() {
+        List<String> genreStringList = movieRepository.findGenres();
+        List<String> allGenres = new ArrayList<>();
+        genreStringList.forEach(genres -> allGenres.addAll(Arrays.asList(genres.split(","))));
+        return allGenres.stream().distinct().collect(Collectors.toList());
     }
 }
