@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 public class MovieController {
 
@@ -29,6 +31,15 @@ public class MovieController {
     public Iterable<Movie> getMoviesByGenres(
             @RequestParam("genres") String genres
     ) {
-        return movieRepository.findByGenresLike(genres);
+        return movieRepository.findByGenresLike("%" + genres + "%");
+    }
+
+    @GetMapping("/movies/search")
+    public Iterable<Movie> getMoviesBySearch(
+            @RequestParam("key") String key
+    ) {
+        List<Movie> movies = movieRepository.findByTitleLike("%" + key + "%");
+        movies.addAll(movieRepository.findByGenresLike("%" + key + "%"));
+        return movies;
     }
 }
