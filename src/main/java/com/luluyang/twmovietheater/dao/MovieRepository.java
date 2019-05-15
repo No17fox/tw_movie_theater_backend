@@ -12,6 +12,8 @@ public interface MovieRepository extends CrudRepository<Movie, Integer> {
 
     List<Movie> findByTitleLike(String title);
 
+    List<Movie> findByOriginalTitleLike(String originalTitle);
+
     @Query(value = "SELECT genres FROM movie", nativeQuery = true)
     List<String> findGenres();
 }

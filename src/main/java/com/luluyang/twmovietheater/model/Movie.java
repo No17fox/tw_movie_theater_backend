@@ -13,7 +13,7 @@ public class Movie {
     private int year;
     private String title;
     private double rating;
-    private String original_title;
+    private String originalTitle;
     private String directors;
     private String casts;
     private String genres;
@@ -59,12 +59,12 @@ public class Movie {
         this.rating = rating;
     }
 
-    public String getOriginal_title() {
-        return this.original_title;
+    public String getOriginalTitle() {
+        return this.originalTitle;
     }
 
-    public void setOriginal_title(String original_title) {
-        this.original_title = original_title;
+    public void setOriginalTitle(String originalTitle) {
+        this.originalTitle = originalTitle;
     }
 
     public String getDirectors() {

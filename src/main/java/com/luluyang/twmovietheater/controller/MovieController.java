@@ -1,5 +1,6 @@
-package com.luluyang.twmovietheater.dao;
+package com.luluyang.twmovietheater.controller;
 
+import com.luluyang.twmovietheater.dao.MovieRepository;
 import com.luluyang.twmovietheater.model.Movie;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,34 +20,29 @@ public class MovieController {
     private MovieRepository movieRepository;
 
     @GetMapping("/movies")
-    public Iterable<Movie> getAllMovies() {
-        return movieRepository.findAll();
-    }
-
-    @GetMapping("/movies/{id}")
-    public Movie getMovieById(
-            @PathVariable("id") Integer id
-    ) {
-        return movieRepository.findById(id).get();
-    }
-
-    @GetMapping("/movies/genres")
-    public Iterable<Movie> getMoviesByGenres(
+    public Iterable<Movie> getAllMovies(
+            @RequestParam("title") String title,
             @RequestParam("genres") String genres
     ) {
-        return movieRepository.findByGenresLike("%" + genres + "%");
-    }
-
-    @GetMapping("/movies/keyword")
-    public Iterable<Movie> getMoviesBySearch(
-            @RequestParam("key") String key
-    ) {
-        List<Movie> movies = movieRepository.findByTitleLike("%" + key + "%");
-        movies.addAll(movieRepository.findByGenresLike("%" + key + "%"));
+        if (title == null && genres == null) {
+            return movieRepository.findAll();
+        }
+        List<Movie> movies = movieRepository.findByTitleLike("%" + title + "%");
+        movies.addAll(movieRepository.findByGenresLike("%" + genres + "%"));
+        movies.addAll(movieRepository.findByOriginalTitleLike("%" + title + "%"));
         return movies;
     }
 
-    @GetMapping("/genres")
+    @GetMapping("/movies/{id}")
+    public Iterable<Movie> getMovieById(
+            @PathVariable("id") Integer id
+    ) {
+        List<Movie> movies = new ArrayList<>();
+        movies.add(movieRepository.findById(id).get());
+        return movies;
+    }
+
+    @GetMapping("/movies/genres")
     public Iterable<String> getGenres() {
         List<String> genreStringList = movieRepository.findGenres();
         List<String> allGenres = new ArrayList<>();
