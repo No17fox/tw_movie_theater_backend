@@ -58,7 +58,7 @@ public class MovieService {
     }
 
     public Iterable<String> getMovieGenres() {
-        List<String> genreStringList = movieRepository.findGenres();
+        List<String> genreStringList = this.movieRepository.findGenres();
         List<String> allGenres = new ArrayList<>();
         genreStringList.forEach(genres -> allGenres.addAll(Arrays.asList(genres.split(","))));
         return allGenres.stream().distinct().collect(Collectors.toList());
