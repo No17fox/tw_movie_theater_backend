@@ -20,7 +20,7 @@ public class MovieController {
     private MovieRepository movieRepository;
 
     @GetMapping("/movies")
-    public Iterable<Movie> getAllMovies(
+    public Iterable<Movie> getMovies(
             @RequestParam("title") String title,
             @RequestParam("genres") String genres
     ) {
